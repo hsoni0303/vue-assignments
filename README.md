@@ -7,5 +7,5 @@ open /dist/index.html
 open /dist/index.html
 
 ### Assignment 3
-npm install -g serve \n
+npm install -g serve <br />
 serve -s dist
