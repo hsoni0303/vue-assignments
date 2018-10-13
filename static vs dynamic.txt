@@ -1,0 +1,9 @@
+Static Website pages display the exact same information whenever anyone visits it.Its not just plain text, they can feature multimedia designs and even videos.However, every visiter to that page will be greeted by exact same text, multimedia design or video everytime he visits page until you change page's soucre code.
+
+Dynamic Website pages are capable of producing different content for different visitors from the same source code file.The website can display different content based on what operating system or browser the visitor is using, whether it is a PC or a mobile device, or even the source that referred the visitor.For example e-commerce websites.
+
+Static sites are faster as it is just HTML, CSS, JavaScript.There is no back and forth between client and server. 
+Static use less resoucres as things like servers and databases are not necessarity needed, And more secure as there is no need to worry about server or databases being hacked.And they are great for seo.
+
+Static web pages are created through HTML language while dynamic web pages are created by the usage of PHP, JavaScript and Actionscript languages.
+Changing the content in static web pages is a difficult task because you have to develop and upload a new page while in dynamic web pages server application do this automatically.Dynamic sites are good if you have plan to update the content and material frequently.
