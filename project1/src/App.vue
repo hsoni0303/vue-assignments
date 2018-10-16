@@ -2,8 +2,10 @@
   <div id="app">
     <div class="part1">
     <exchange-section  @selected_currency="selectedCrypto"></exchange-section>
+    <!-- eslint-disable-next-line -->
     <pair-section :selected_currency="selected_currency" @selected_pair="selectedPair"></pair-section>
     </div>
+    <!-- eslint-disable-next-line -->
     <trades-section class="part2" :selected_currency="selected_currency" :selected_pair="selected_pair"></trades-section>
   </div>
 </template>
@@ -24,11 +26,11 @@ export default {
     return {
       selected_currency: '',
       selected_pair: '',
-    }
+    };
   },
   methods: {
     selectedCrypto(currency) {
-      if(currency==''){
+      if (currency === '') {
         this.selected_pair = '';
       }
       this.selected_currency = currency;
@@ -46,9 +48,13 @@ body {
   padding: 0;
 }
 #app {
-  font-family: 'Oxygen', sans-serif;
-  background: rgb(74,36,84);
-  background: linear-gradient(0deg, rgba(74,36,84,1) 0%, rgba(178,0,77,1) 50%);
+  font-family: "Oxygen", sans-serif;
+  background: rgb(74, 36, 84);
+  background: linear-gradient(
+    0deg,
+    rgba(74, 36, 84, 1) 0%,
+    rgba(178, 0, 77, 1) 50%
+  );
   display: flex;
 }
 .part1 {

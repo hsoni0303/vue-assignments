@@ -2,7 +2,9 @@
   <div>
     <div id="pair-section">
       <h1>PAIR</h1>
-      <input v-model='selected_pair' list="currency_pairs" name="currency_pairs" @input="$emit('selected_pair', selected_pair)">
+      <!-- eslint-disable-next-line -->
+      <input v-model='selected_pair' list="currency_pairs" name="currency_pairs"
+       @focus="selected_pair=''" @input="$emit('selected_pair', selected_pair)">
       <datalist id="currency_pairs">
           <option v-for="pair in pairs" :value="pair" :key="pair">
           </option>
@@ -12,7 +14,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Pair',
   props: ['selected_currency'],
@@ -26,12 +27,16 @@ export default {
     getPairs() {
       this.selected_pair = '';
       this.pairs = [];
-      if(this.selected_currency==''){
+      if (this.selected_currency === '') {
         this.$emit('selected_pair', this.selected_pair);
         return;
       }
-      let x = this.selected_currency[0].toLowerCase() + this.selected_currency.slice(1);
-      let y = new ccxt[x] ();
+      const x =
+        this.selected_currency[0].toLowerCase() +
+        this.selected_currency.slice(1);
+      // eslint-disable-next-line
+      const y = new ccxt[x]();
+      // eslint-disable-next-line
       for (const item in y.markets) {
         this.pairs.push(item);
       }
@@ -43,27 +48,26 @@ export default {
     },
   },
 };
-
 </script>
 
 <style scoped>
 #pair-section {
-    width: 100%;
-    height: 100px;
-    text-align: center;
-    margin: 0 auto;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  margin: 0 auto;
 }
 h1 {
-    color: white;
-    margin: 0;
-    padding-top: 70px;
-    padding-bottom: 20px;
-    font-weight: 400;
-    font-size: 210%;
+  color: white;
+  margin: 0;
+  padding-top: 70px;
+  padding-bottom: 20px;
+  font-weight: 400;
+  font-size: 150%;
 }
 #pair-section input {
-    border-style: none;
-    border-radius: 3%;
-    padding: 10px;
+  border-style: none;
+  border-radius: 3%;
+  padding: 10px;
 }
 </style>
