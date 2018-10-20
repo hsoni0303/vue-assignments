@@ -4,11 +4,104 @@
 </template>
 
 <script>
+import Exchange from "./components/Exchange.vue";
+import Pair from "./components/Pair.vue";
+import Trades from "./components/Trades.vue";
+import GoldenLayout from "golden-layout";
+import Vue from 'vue';
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
+    Exchange,
+    Pair,
+    Trades
   },
+  mounted() {
+    const config = {
+      setting: {
+        hasHeader: true,
+        showPopoutIcon: true,
+        showCloseIcon: true,
+        showMaximizeIcon: true
+      },
+      dimensions: {
+        borderwidth: 2,
+        minItemHeight: 10,
+        minItemWidth: 10,
+        headerHeight: 20,
+        dragProxyWidth: 300,
+        dragProxyHeight: 200
+      },
+      content: [
+        {
+          type: "row",
+          content: [
+            {
+              type: "column",
+              content: [
+                {
+                  type: "component",
+                  componentName: "Exchange"
+                },
+                {
+                  type: "component",
+                  componentName: "Pair"
+                }
+              ]
+            },
+            {
+              type: "component",
+              componentName: "Trades"
+            }
+          ]
+        }
+      ]
+    };
+    let self = this;
+    const gLayout = new GoldenLayout(config, $("#app"));
+
+    gLayout.registerComponent("Exchange", (container, state) => {
+      const id = "exchange";
+      const html = `<div id=${id}></div>`;
+      container.getElement().html(html);
+      setTimeout(() => {
+        const ExchangeComponentConstructor = Vue.component("exchange").extend({
+          store: self.$store
+        });
+        const vm = new ExchangeComponentConstructor();
+        vm.$mount("#exchange");
+      });
+    });
+
+    gLayout.registerComponent("Pair", (container, state) => {
+      const id = "pair";
+      const html = `<div id=${id}></div>`;
+      container.getElement().html(html);
+      setTimeout(() => {
+        const ExchangeComponentConstructor = Vue.component("pair").extend({
+          store: self.$store
+        });
+        const vm = new ExchangeComponentConstructor();
+        vm.$mount("#pair");
+      });
+    });
+    
+    gLayout.registerComponent("Trades", (container, state) => {
+      const id = "trades";
+      const html = `<div id=${id}></div>`;
+      container.getElement().html(html);
+      setTimeout(() => {
+        const ExchangeComponentConstructor = Vue.component("trades").extend({
+          store: self.$store
+        });
+        const vm = new ExchangeComponentConstructor();
+        vm.$mount("#trades");
+      });
+    });
+
+    gLayout.init();
+  }
 };
 </script>
 
@@ -18,7 +111,7 @@ body {
   padding: 0;
 }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
