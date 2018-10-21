@@ -54,6 +54,7 @@ export default {
     },
     selected_pair: function() {
       this.$store.commit('setPair', this.selected_pair);
+      this.$emit('pair', this.selected_pair);
     },
   }
 }

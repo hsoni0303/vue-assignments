@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-  </div>
+  <div id="app"></div>
 </template>
 
 <script>
@@ -9,6 +8,8 @@ import Pair from "./components/Pair.vue";
 import Trades from "./components/Trades.vue";
 import GoldenLayout from "golden-layout";
 import Vue from 'vue';
+
+const bus = new Vue();
 
 export default {
   name: "app",
@@ -58,8 +59,22 @@ export default {
         }
       ]
     };
+
+    var gLayout,
+    savedState = localStorage.getItem( 'savedState' );
+
+    if( savedState !== null ) {
+      gLayout = new GoldenLayout( JSON.parse( savedState ) );
+    } else {
+      gLayout = new GoldenLayout(config, $('#app'));
+    }
+
     let self = this;
-    const gLayout = new GoldenLayout(config, $("#app"));
+
+    gLayout.on( 'stateChanged', function(){
+      var state = JSON.stringify( gLayout.toConfig() );
+      localStorage.setItem( 'savedState', state );
+    });
 
     gLayout.registerComponent("Exchange", (container, state) => {
       const id = "exchange";
@@ -86,7 +101,7 @@ export default {
         vm.$mount("#pair");
       });
     });
-    
+
     gLayout.registerComponent("Trades", (container, state) => {
       const id = "trades";
       const html = `<div id=${id}></div>`;

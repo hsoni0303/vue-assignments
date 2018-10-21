@@ -44,6 +44,7 @@ export default {
   watch: {
     currency_id: function(id) {
       this.$store.commit('setCurrency', id);
+      this.$emit('currency_id', this.currency_id);
     },
   },
 };
